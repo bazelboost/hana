@@ -14,5 +14,10 @@ cc_library(
 	defines = [
 	],
 	deps = [
+		"@com_github_bazelboost_core//:core",
+		"@com_github_bazelboost_fusion//:fusion",
+		"@com_github_bazelboost_config//:config",
+		"@com_github_bazelboost_mpl//:mpl",
+		"@com_github_bazelboost_tuple//:tuple"
 	],
 )
