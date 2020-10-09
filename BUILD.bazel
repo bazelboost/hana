@@ -1,0 +1,31 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+_public_hdrs = [
+    "include/boost/*.hpp",
+    "include/boost/hana/*.hpp",
+    "include/boost/hana/concept/*.hpp",
+    "include/boost/hana/core/*.hpp",
+    "include/boost/hana/experimental/*.hpp",
+    "include/boost/hana/ext/*.hpp",
+    "include/boost/hana/ext/boost/*.hpp",
+    "include/boost/hana/ext/boost/fusion/*.hpp",
+    "include/boost/hana/ext/boost/mpl/*.hpp",
+    "include/boost/hana/ext/std/*.hpp",
+    "include/boost/hana/functional/*.hpp",
+    "include/boost/hana/fwd/*.hpp",
+    "include/boost/hana/fwd/concept/*.hpp",
+    "include/boost/hana/fwd/core/*.hpp",
+]
+
+cc_library(
+    name = "hana_internal",
+    hdrs = glob(["include/boost/**/*.hpp"], exclude = _public_hdrs),
+)
+
+cc_library(
+    name = "hana",
+    visibility = ["//visibility:public"],
+    includes = ["include"],
+    hdrs = glob(_public_hdrs),
+    deps = [":hana_internal"],
+)
